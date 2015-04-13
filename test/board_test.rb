@@ -17,4 +17,12 @@ class BoardTest < Minitest::Test
     board = Board.new(Array.new(9, "X"))
     assert_equal true, board.is_full?
   end
+
+  def test_board_knows_marked_squares
+    array = Array.new(7, " ")
+    array << "X"
+    array << "O"
+    board = Board.new(array)
+    assert_equal 2, board.marked_squares
+  end
 end

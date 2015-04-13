@@ -4,6 +4,10 @@ class Board
   end
 
   def is_full?
-    @squares.all? { |s| s != " " }
+    marked_squares == 9
+  end
+
+  def marked_squares
+    @squares.select { |s| s != " " }.length
   end
 end

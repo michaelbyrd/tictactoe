@@ -16,5 +16,13 @@ class GameTest < Minitest::Test
   def test_game_has_two_players
     game = Game.new
     assert_equal 2, game.players.length
+    assert_equal true, game.players[0].is_human?
+    assert_equal false, game.players[1].is_human?
+  end
+
+  def test_players_can_take_thier_turns
+    game = Game.new
+    game.play_round
+    assert_equal 2, game.marked_squares
   end
 end
