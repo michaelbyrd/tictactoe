@@ -51,4 +51,19 @@ class BoardTest < Minitest::Test
     board = Board.new(array)
     assert_equal true, board.is_won?
   end
+
+  def test_board_can_win_with_a_column
+    array = Array.new
+    3.times { array += [" ", " ", "O"]}
+    board = Board.new(array)
+    assert_equal true, board.is_won?
+  end
+
+  def test_board_can_win_with_a_diagonal
+    array = ["X", "O", " ",
+             "O", "X", " ",
+             " ", "O", "X"]
+    board = Board.new(array)
+    assert_equal true, board.is_won?
+  end
 end

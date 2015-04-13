@@ -26,7 +26,9 @@ class Board
   end
 
   private def column_win
-    false
+    columns.any? do |c|
+      c.uniq.length == 1 && c.uniq[0] != " "
+    end
   end
 
   private def row_win
@@ -35,13 +37,32 @@ class Board
     end
   end
 
+  private def diagonal_win
+    diagonals.any? do |d|
+      d.uniq.length == 1 && d.uniq[0] != " "
+    end
+  end
+
+  private def columns
+    s = @squares
+    [
+      [s[0], s[3], s[6]],
+      [s[1], s[4], s[7]],
+      [s[2], s[5], s[8]]
+    ]
+  end
+
   private def rows
     [@squares[0..2],
      @squares[3..5],
      @squares[6..8]]
   end
 
-  private def diagonal_win
-    false
+  private def diagonals
+    s = @squares
+    [
+      [s[0], s[4], s[8]],
+      [s[2], s[4], s[6]]
+    ]
   end
 end
