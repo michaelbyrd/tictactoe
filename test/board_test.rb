@@ -66,4 +66,20 @@ class BoardTest < Minitest::Test
     board = Board.new(array)
     assert_equal true, board.is_won?
   end
+
+  def test_board_can_display_itself
+    board = Board.new
+    assert_output(empty_board) do
+      board.display
+    end
+
+  end
+
+
+  def empty_board
+    %Q{| | | |
+| | | |
+| | | |
+}
+  end
 end

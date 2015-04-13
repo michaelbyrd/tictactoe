@@ -25,6 +25,14 @@ class Board
     column_win || row_win || diagonal_win
   end
 
+  def display
+    s = @squares
+    puts "|#{s[0]}|#{s[1]}|#{s[2]}|"
+    puts "|#{s[3]}|#{s[4]}|#{s[5]}|"
+    puts "|#{s[6]}|#{s[7]}|#{s[8]}|"
+
+  end
+
   private def column_win
     columns.any? do |c|
       c.uniq.length == 1 && c.uniq[0] != " "
