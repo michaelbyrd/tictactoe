@@ -20,4 +20,8 @@ class Board
   def marked_squares
     @squares.select { |s| s != " " }.length
   end
+
+  def is_won?
+    false
+  end
 end
