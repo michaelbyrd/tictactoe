@@ -27,4 +27,10 @@ class GameTest < Minitest::Test
       assert_equal 2, game.marked_squares
     end
   end
+
+  def test_game_is_over_after_nine_turns
+    game = Game.new
+    4.times { game.play_round }
+    refute game.play_round
+  end
 end

@@ -11,7 +11,8 @@ class Game
 
   def play_round
     @players.each do |p|
-      player_turn(p)
+      player_turn(p) unless self.is_over?
+      return false if self.is_over? # FIXME
     end
   end
 
@@ -22,7 +23,6 @@ class Game
     else
       @board.mark(mark, "X")
     end
-
   end
 
   def marked_squares
@@ -30,7 +30,7 @@ class Game
   end
 
   def is_over?
-    false
+    @board.is_full? || false
   end
 
 end
