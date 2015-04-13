@@ -11,7 +11,7 @@ class Game
 
   def play_round
     @players.each do |p|
-      @board.mark(p.take_turn) unless self.is_over?
+      @board.mark(p.take_turn, "X") unless self.is_over?
     end
   end
 

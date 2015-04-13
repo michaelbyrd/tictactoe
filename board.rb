@@ -8,7 +8,11 @@ class Board
   end
 
   def mark(index, symbol)
-    @squares[index] = symbol
+    @squares[index] = symbol unless self.is_marked?(index)
+  end
+
+  def is_marked?(index)
+    @squares[index] != " "
   end
 
   def marked_squares

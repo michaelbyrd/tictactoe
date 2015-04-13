@@ -31,4 +31,12 @@ class BoardTest < Minitest::Test
     board.mark(0, "X")
     assert_equal 1, board.marked_squares
   end
+
+  def test_same_square_cant_be_marked_twice
+    board = Board.new
+    board.mark(0, "X")
+    assert_equal 1, board.marked_squares
+    refute board.mark(0,"O")
+    assert board.mark(1,"O")
+  end
 end

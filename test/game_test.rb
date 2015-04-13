@@ -21,8 +21,10 @@ class GameTest < Minitest::Test
   end
 
   def test_players_can_take_thier_turns
-    game = Game.new
-    game.play_round
-    assert_equal 2, game.marked_squares
+    10.times do
+      game = Game.new
+      game.play_round
+      assert_equal 2, game.marked_squares
+    end
   end
 end
