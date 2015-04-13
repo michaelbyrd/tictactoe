@@ -8,10 +8,22 @@ class Player
   end
 
   def take_turn
-    rand(0..8)
+    if @human
+      human_turn
+    else
+      computer_turn
+    end
   end
 
   def symbol
     @human ? "X" : "O"
+  end
+
+  private def human_turn
+    rand(0..8)
+  end
+
+  private def computer_turn
+    rand(0..8)
   end
 end
