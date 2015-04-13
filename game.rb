@@ -30,7 +30,11 @@ class Game
   end
 
   def is_over?
-    @board.is_full? || false
+    @board.is_won? || @board.is_full? || false
+  end
+
+  def display
+    @board.display
   end
 
 end
