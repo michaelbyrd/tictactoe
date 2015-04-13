@@ -22,6 +22,18 @@ class Board
   end
 
   def is_won?
+    column_win || row_win || diagonal_win
+  end
+
+  private def column_win
+    false
+  end
+
+  private def row_win
+    false
+  end
+
+  private def diagonal_win
     false
   end
 end
