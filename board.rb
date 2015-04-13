@@ -7,7 +7,9 @@ class Board
     marked_squares == 9
   end
 
-  def mark(index, symbol)
+  def mark(array)
+    index = array[0]
+    symbol = array[1]
     @squares[index] = symbol unless self.is_marked?(index)
   end
 

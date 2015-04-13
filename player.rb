@@ -8,11 +8,7 @@ class Player
   end
 
   def take_turn
-    if @human
-      human_turn
-    else
-      computer_turn
-    end
+    [ @human ? human_turn : computer_turn , symbol ]
   end
 
   def symbol

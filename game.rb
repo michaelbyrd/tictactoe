@@ -18,10 +18,10 @@ class Game
 
   def player_turn(player)
     mark = player.take_turn
-    if @board.is_marked?(mark)
+    if @board.is_marked?(mark[0])
       player_turn(player)
     else
-      @board.mark(mark, player.symbol)
+      @board.mark(mark)
     end
   end
 
