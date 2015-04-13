@@ -72,6 +72,11 @@ class BoardTest < Minitest::Test
     assert_output(empty_board) do
       board.display
     end
+    array = Array.new(6, " ") + ["X", "X", "X"]
+    board = Board.new(array)
+    assert_output(marked_board) do
+      board.display
+    end
 
   end
 
@@ -81,5 +86,13 @@ class BoardTest < Minitest::Test
 | | | |
 | | | |
 }
+  end
+
+  def marked_board
+    %Q{| | | |
+| | | |
+|X|X|X|
+}
+
   end
 end
