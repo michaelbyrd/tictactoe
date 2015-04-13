@@ -21,7 +21,7 @@ class Game
     if @board.is_marked?(mark)
       player_turn(player)
     else
-      @board.mark(mark, "X")
+      @board.mark(mark, player.symbol)
     end
   end
 
