@@ -6,4 +6,8 @@ class Player
   def is_human?
     @human
   end
+
+  def take_turn
+    rand(0..8)
+  end
 end

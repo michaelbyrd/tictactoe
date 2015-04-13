@@ -25,4 +25,10 @@ class BoardTest < Minitest::Test
     board = Board.new(array)
     assert_equal 2, board.marked_squares
   end
+
+  def test_board_can_be_marked
+    board = Board.new
+    board.mark(0, "X")
+    assert_equal 1, board.marked_squares
+  end
 end

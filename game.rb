@@ -10,11 +10,17 @@ class Game
   end
 
   def play_round
-
+    @players.each do |p|
+      @board.mark(p.take_turn) unless self.is_over?
+    end
   end
 
   def marked_squares
     @board.marked_squares
+  end
+
+  def is_over?
+    false
   end
 
 end

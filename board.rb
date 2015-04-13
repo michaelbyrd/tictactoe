@@ -7,6 +7,10 @@ class Board
     marked_squares == 9
   end
 
+  def mark(index, symbol)
+    @squares[index] = symbol
+  end
+
   def marked_squares
     @squares.select { |s| s != " " }.length
   end
