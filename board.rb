@@ -30,7 +30,15 @@ class Board
   end
 
   private def row_win
-    false
+    rows.any? do |r|
+      r.uniq.length == 1 && r.uniq[0] != " "
+    end
+  end
+
+  private def rows
+    [@squares[0..2],
+     @squares[3..5],
+     @squares[6..8]]
   end
 
   private def diagonal_win

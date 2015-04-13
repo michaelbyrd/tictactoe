@@ -39,4 +39,16 @@ class BoardTest < Minitest::Test
     refute board.mark([0,"O"])
     assert board.mark([1,"O"])
   end
+
+  def test_board_can_have_winner
+    board = Board.new
+    assert_equal false, board.is_won?
+  end
+
+  def test_board_can_win_with_a_row
+    array = Array.new(6, " ")
+    array += ["X","X","X"]
+    board = Board.new(array)
+    assert_equal true, board.is_won?
+  end
 end
