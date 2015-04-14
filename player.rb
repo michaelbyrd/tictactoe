@@ -7,14 +7,14 @@ class Player
     @winner = false
   end
 
-  def record(index)
-    @squares[index] = true
-    @squares.each_with_index do |square, i|
-      if square && index + i < 15 && i != index # TODO figure this out
-        @pairs[ index + i ] = true
+  def record(mark)
+    @squares[mark] = true
+    @squares.each_with_index do |square, index|
+      if square && mark + index < 15 && index != mark # TODO figure this out
+        @pairs[ mark + index ] = true
       end
     end
-    @winner = true if @pairs[ 15 - index ]
+    @winner = true if @pairs[ 15 - mark ]
   end
 
   # def winning_moves
@@ -37,7 +37,7 @@ end
 
 class ComputerPlayer < Player
   def take_turn
-    # rand(0..8)
+    # rand(1..9)
     [3,8,1].sample + 1
   end
 end

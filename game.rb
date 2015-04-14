@@ -58,28 +58,21 @@ class Game
     write(@board[4]), write(@board[9]), write(@board[2])]
   end
 
-  # def display
-  #   d = data
-  #   puts "|#{d[0]}|#{d[1]}|#{d[2]}|"
-  #   puts "|#{d[3]}|#{d[4]}|#{d[5]}|"
-  #   puts "|#{d[6]}|#{d[7]}|#{d[8]}|"
-  # end
-
   def display
     d = data
     puts "|#{d[0]}|#{d[1]}|#{d[2]}|"
     puts "|#{d[3]}|#{d[4]}|#{d[5]}|"
     puts "|#{d[6]}|#{d[7]}|#{d[8]}|"
   end
-  
+
   private def write(square)
     square ? @players[square].symbol : " "
   end
 
 end
 
-puts "|7|0|5|"
-puts "|2|4|6|"
-puts "|3|8|1|"
+puts "|8|1|6|"
+puts "|3|5|7|"
+puts "|4|9|2|"
 
 Game.new.play_round
