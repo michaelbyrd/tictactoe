@@ -12,11 +12,7 @@ class Player
     @squares.each_with_index do |s, i|
       @pairs[ index + i ] = true if s
     end
-    check_win(index)
-  end
-
-  def check_win(index)
-    @winner = true if @pairs[11-index]
+    @winner = true if @pairs[ 12 - index ]
   end
 
   def has_won?

@@ -12,28 +12,27 @@ class Game
   def initialize
     @board = Array.new(9, false)
     @players = [ HumanPlayer.new(true), ComputerPlayer.new(false) ]
-    @switch = [ 0, 1 ].sample
+    @switch = 0 # [ 0, 1 ].sample
     @count = 0
   end
 
   def play_round
+    puts "|7|0|5|"
+    puts "|2|4|6|"
+    puts "|3|8|1|"
+
     @players[@switch].symbol = "X"
     until is_over?
+      player = @players[@switch]
+      puts "-----------"
+      puts "#{player.class} has won: #{player.has_won?}"
+      display
+      puts "-----------"
       player_turn(@players[@switch])
     end
   end
 
   def player_turn(player)
-
-    puts "-----------"
-    
-    puts "# 7 0 5 #"
-    puts "# 2 4 6 #"
-    puts "# 3 8 1 #"
-
-    display
-    puts "-----------"
-
     mark = player.take_turn
     if @board[mark]
       player_turn(player)
@@ -47,7 +46,8 @@ class Game
 
   def is_over?
     if winner || @count >= 9
-      puts winner.class
+      puts "#{winner.class} has won!"
+      exit
     end
   end
 
