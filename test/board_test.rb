@@ -89,9 +89,9 @@ class BoardTest < Minitest::Test
   end
 
   def marked_board
-    %Q{| | | |
-| | | |
-|X|X|X|
+    %Q{|X| | |
+| | |X|
+| |X| |
 }
 
   end

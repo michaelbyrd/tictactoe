@@ -1,11 +1,10 @@
 require './board'
 require './player'
 
-
 # # # # #
-# 8 1 6 #
-# 3 5 7 #
-# 4 9 2 #
+# 7 0 5 #
+# 2 4 6 #
+# 3 8 1 #
 # # # # #
 
 class Game

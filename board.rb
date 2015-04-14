@@ -6,9 +6,9 @@ class Board
 
   def display
     s = @squares
-    puts "|#{s[0]}|#{s[1]}|#{s[2]}|"
-    puts "|#{s[3]}|#{s[4]}|#{s[5]}|"
-    puts "|#{s[6]}|#{s[7]}|#{s[8]}|"
+    puts "|#{s[7]}|#{s[0]}|#{s[5]}|"
+    puts "|#{s[2]}|#{s[4]}|#{s[6]}|"
+    puts "|#{s[3]}|#{s[8]}|#{s[1]}|"
   end
 
   def is_full?
