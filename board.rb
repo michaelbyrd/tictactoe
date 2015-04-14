@@ -4,6 +4,13 @@ class Board
     @squares = squares
   end
 
+  def display
+    s = @squares
+    puts "|#{s[0]}|#{s[1]}|#{s[2]}|"
+    puts "|#{s[3]}|#{s[4]}|#{s[5]}|"
+    puts "|#{s[6]}|#{s[7]}|#{s[8]}|"
+  end
+
   def is_full?
     marked_squares == 9
   end
@@ -24,14 +31,6 @@ class Board
 
   def is_won?
     column_win || row_win || diagonal_win
-  end
-
-  def display
-    s = @squares
-    puts "|#{s[0]}|#{s[1]}|#{s[2]}|"
-    puts "|#{s[3]}|#{s[4]}|#{s[5]}|"
-    puts "|#{s[6]}|#{s[7]}|#{s[8]}|"
-
   end
 
   private def column_win

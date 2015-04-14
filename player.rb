@@ -1,6 +1,16 @@
 class Player
+  # attr_accessor :squares, :pairs
   def initialize(human)
     @human = human
+    @squares = Array.new(9, false)
+    @pairs = Array.new(11, false)
+  end
+
+  def record(index)
+    @squares[index] = true
+    @squares.each_with_index do |s, i|
+      @pairs[ index + i ] = true if s
+    end
   end
 
   def is_human?
@@ -29,5 +39,6 @@ class Player
       end
     else
       rand(0..8)
+    end
   end
 end

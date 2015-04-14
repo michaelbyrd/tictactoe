@@ -1,20 +1,26 @@
 require './board'
 require './player'
 
+
+# # # # #
+# 8 1 6 #
+# 3 5 7 #
+# 4 9 2 #
+# # # # #
+
 class Game
   attr_accessor :board, :players
 
   def initialize
     @board = Board.new
     @players = [ Player.new(true), Player.new(false) ]
+    @switch = [ 0, 1 ].sample
   end
 
   def play_round
-    @players.each do |p|
-      @board.display
-      player_turn(p) unless self.is_over?
-      return false if self.is_over? # FIXME
-    end
+    display
+    player_turn(@players[@switch]) unless self.is_over?
+    return false if self.is_over? # FIXME
   end
 
   def player_turn(player)
@@ -22,6 +28,8 @@ class Game
     if @board.is_marked?(mark[0])
       player_turn(player)
     else
+      @switch = 1 - @switch
+      player.record(mark[0])
       @board.mark(mark)
     end
   end
@@ -40,8 +48,7 @@ class Game
 
 end
 
-g = Game.new
-until g.is_over?
-  g.play_round
-end
-
+# g = Game.new
+# until g.is_over?
+#   g.play_round
+# end
