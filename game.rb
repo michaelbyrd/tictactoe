@@ -53,10 +53,17 @@ class Game
   end
 
   def data
-    [write(@board[7]), write(@board[0]), write(@board[5]),
-    write(@board[2]), write(@board[4]), write(@board[6]),
-    write(@board[3]), write(@board[8]), write(@board[1])]
+    [write(@board[8]), write(@board[1]), write(@board[6]),
+    write(@board[3]), write(@board[5]), write(@board[7]),
+    write(@board[4]), write(@board[9]), write(@board[2])]
   end
+
+  # def display
+  #   d = data
+  #   puts "|#{d[0]}|#{d[1]}|#{d[2]}|"
+  #   puts "|#{d[3]}|#{d[4]}|#{d[5]}|"
+  #   puts "|#{d[6]}|#{d[7]}|#{d[8]}|"
+  # end
 
   def display
     d = data
@@ -64,7 +71,7 @@ class Game
     puts "|#{d[3]}|#{d[4]}|#{d[5]}|"
     puts "|#{d[6]}|#{d[7]}|#{d[8]}|"
   end
-
+  
   private def write(square)
     square ? @players[square].symbol : " "
   end
