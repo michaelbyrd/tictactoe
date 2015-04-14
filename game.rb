@@ -29,18 +29,17 @@ class Game
     else
       @board[mark] = @switch
       player.record(mark)
-      check_win(player, mark)
       @switch = 1 - @switch
       @count += 1
     end
   end
 
   def is_over?
-    @count >= 9 || @players.any? { |p| p.is_winner? }
+    winner || @count >= 9
   end
 
-  private def check_win(player, index)
-    player.check_win(index)
+  private def winner
+    @players.select { |p| p.has_won? }[0]
   end
 
 end

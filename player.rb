@@ -11,6 +11,8 @@ class Player
     @squares.each_with_index do |s, i|
       @pairs[ index + i ] = true if s
     end
+
+    check_win(index)
   end
 
   def check_win(index)
@@ -21,7 +23,7 @@ class Player
     @human
   end
 
-  def is_winner?
+  def has_won?
     @winner
   end
 
