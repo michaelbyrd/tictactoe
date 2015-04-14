@@ -17,11 +17,10 @@ class Player
     @winner = true if @pairs[ 15 - mark ]
   end
 
-  # def winning_moves
-  #   @squares.map.with_index do |square, i|
-  #
-  #   end
-  # end
+  def winning_moves
+    moves = @squares.map.with_index { |square, i| i if @pairs[ 15 - i ]}
+    moves.select {|m| !m.nil? }
+  end
 
   def has_won?
     @winner
@@ -30,14 +29,19 @@ class Player
 end
 
 class HumanPlayer < Player
-  def take_turn
+  def take_turn(other)
     gets.chomp.to_i
   end
 end
 
 class ComputerPlayer < Player
-  def take_turn
-    # rand(1..9)
-    [3,8,1].sample + 1
+  def take_turn(other)
+    if winning_moves.length > 0
+      winnging_moves.sample
+    elsif other.winning_moves.length > 0
+      other.winning_moves[0]
+    else
+      rand(0..9)
+    end
   end
 end
