@@ -1,9 +1,11 @@
 class Player
+  attr_accesor :symbol
   def initialize(human)
     @human = human
     @squares = Array.new(9, false)
     @pairs = Array.new(11, false)
     @winner = false
+    @symbol = nil
   end
 
   def record(index)
@@ -32,7 +34,7 @@ class Player
   end
 
   def symbol
-    @human ? "X" : "O"
+    @symbol || "O"
   end
 
   private def human_turn

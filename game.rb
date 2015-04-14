@@ -17,6 +17,7 @@ class Game
   end
 
   def play_round
+    @players[@switch].symbol = "X"
     until is_over?
       player_turn(@players[@switch])
     end
