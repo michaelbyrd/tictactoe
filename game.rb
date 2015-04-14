@@ -14,7 +14,7 @@ class Game
   def initialize
     @board = Array.new(9, false)
     @players = [ HumanPlayer.new, ComputerPlayer.new ]
-    @switch = 0 # [ 0, 1 ].sample
+    @switch = [ 0, 1 ].sample
     @count = 0
   end
 
@@ -22,7 +22,6 @@ class Game
     @players[@switch].symbol = "X"
     until is_over?
       player = @players[@switch]
-      puts "#{player.class} has won: #{player.has_won?}"
       puts "-----------"
       player_turn(@players[@switch])
       display
@@ -44,10 +43,6 @@ class Game
   def is_over?
     if winner || @count >= 9
       puts "#{winner.class} has won!"
-      print winner.squares
-      puts "--"
-      print winner.pairs
-      puts "--"
       display
       exit
     end
