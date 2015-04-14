@@ -1,5 +1,5 @@
 class Player
-  attr_accessor :symbol
+  attr_accessor :symbol, :squares, :pairs
   def initialize(human)
     @squares = Array.new(9, false)
     @pairs = Array.new(11, false)
@@ -9,8 +9,8 @@ class Player
 
   def record(index)
     @squares[index] = true
-    @squares.each_with_index do |s, i|
-      @pairs[ index + i ] = true if s
+    @squares.each_with_index do |square, i|
+      @pairs[ index + i ] = true if square
     end
     @winner = true if @pairs[ 12 - index ]
   end
@@ -28,6 +28,7 @@ end
 
 class ComputerPlayer < Player
   def take_turn
-    rand(0..8)
+    # rand(0..8)
+    [3,8,1].sample
   end
 end
