@@ -7,8 +7,8 @@ class Player
     @human
   end
 
-  def take_turn
-    [ @human ? human_turn : computer_turn , symbol ]
+  def take_turn(board)
+    [ @human ? human_turn : computer_turn(board) , symbol ]
   end
 
   def symbol
@@ -16,10 +16,18 @@ class Player
   end
 
   private def human_turn
-    rand(0..8)
+    gets.chomp.to_i
   end
 
-  private def computer_turn
-    rand(0..8)
+  private def computer_turn(board)
+    array = board.squares
+    if board.marked_squares < 2
+      if array[4] == " "
+        4
+      else
+        0
+      end
+    else
+      rand(0..8)
   end
 end

@@ -1,4 +1,5 @@
 class Board
+  attr_reader :squares
   def initialize(squares = Array.new(9, " "))
     @squares = squares
   end

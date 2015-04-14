@@ -11,13 +11,14 @@ class Game
 
   def play_round
     @players.each do |p|
+      @board.display
       player_turn(p) unless self.is_over?
       return false if self.is_over? # FIXME
     end
   end
 
   def player_turn(player)
-    mark = player.take_turn
+    mark = player.take_turn(@board)
     if @board.is_marked?(mark[0])
       player_turn(player)
     else
@@ -38,3 +39,9 @@ class Game
   end
 
 end
+
+g = Game.new
+until g.is_over?
+  g.play_round
+end
+
