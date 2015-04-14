@@ -63,6 +63,5 @@ class GameTest < Minitest::Test
 | | |X|
 | |X| |
 }
-
   end
 end

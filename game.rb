@@ -11,7 +11,7 @@ class Game
 
   def initialize
     @board = Array.new(9, false)
-    @players = [ Player.new(true), Player.new(false) ]
+    @players = [ HumanPlayer.new(true), ComputerPlayer.new(false) ]
     @switch = [ 0, 1 ].sample
     @count = 0
   end
@@ -24,6 +24,16 @@ class Game
   end
 
   def player_turn(player)
+
+    puts "-----------"
+    
+    puts "# 7 0 5 #"
+    puts "# 2 4 6 #"
+    puts "# 3 8 1 #"
+
+    display
+    puts "-----------"
+
     mark = player.take_turn
     if @board[mark]
       player_turn(player)
@@ -36,9 +46,14 @@ class Game
   end
 
   def is_over?
-    winner.exist? || @count >= 9
+    if winner || @count >= 9
+      puts winner.class
+    end
   end
 
+  private def winner
+    @players.select { |p| p.has_won? }[0]
+  end
 
   def display
     puts "|#{write(@board[7])}|#{write(@board[0])}|#{write(@board[5])}|"
@@ -50,8 +65,6 @@ class Game
     square ? @players[square].symbol : " "
   end
 
-  private def winner
-    @players.select { |p| p.has_won? }[0]
-  end
-
 end
+
+Game.new.play_round

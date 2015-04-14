@@ -3,9 +3,7 @@ class Player
   def initialize(human)
     @squares = Array.new(9, false)
     @pairs = Array.new(11, false)
-
-    @human = human
-    @symbol = nil
+    @symbol = "O"
     @winner = false
   end
 
@@ -14,7 +12,6 @@ class Player
     @squares.each_with_index do |s, i|
       @pairs[ index + i ] = true if s
     end
-
     check_win(index)
   end
 
@@ -22,27 +19,19 @@ class Player
     @winner = true if @pairs[11-index]
   end
 
-  def is_human?
-    @human
-  end
-
   def has_won?
     @winner
   end
+end
 
+class HumanPlayer < Player
   def take_turn
-    @human ? human_turn : computer_turn
-  end
-
-  def symbol
-    @symbol || "O"
-  end
-
-  private def human_turn
     gets.chomp.to_i
   end
+end
 
-  private def computer_turn
+class ComputerPlayer < Player
+  def take_turn
     rand(0..8)
   end
 end
