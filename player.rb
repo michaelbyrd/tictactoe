@@ -1,10 +1,14 @@
 class Player
-  attr_accessor :symbol
+  attr_accessor :symbol, :squares
   def initialize
     @squares = Array.new(10, false)
     @pairs = Array.new(11, false)
     @symbol = "O"
     @winner = false
+  end
+
+  def has_won?
+    @winner
   end
 
   def record(mark)
@@ -17,15 +21,14 @@ class Player
     @winner = true if @pairs[ 15 - mark ]
   end
 
-  def winning_moves
+  private def possible_moves
     moves = @squares.map.with_index { |square, i| i if @pairs[ 15 - i ]}
-    moves.select {|m| !m.nil? }
+    moves.reject {|m| m.nil? }
   end
 
-  def has_won?
-    @winner
+  def winning_moves(other)
+    possible_moves.reject { |m| other.squares[m] }
   end
-
 end
 
 class HumanPlayer < Player
@@ -36,12 +39,8 @@ end
 
 class ComputerPlayer < Player
   def take_turn(other)
-    if winning_moves.length > 0
-      winnging_moves.sample
-    elsif other.winning_moves.length > 0
-      other.winning_moves[0]
-    else
-      rand(0..9)
-    end
+    mine = winning_moves(other)[0]
+    theirs = other.winning_moves(self)[0]
+    mine || theirs || rand(0..9)
   end
 end

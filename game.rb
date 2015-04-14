@@ -29,8 +29,6 @@ class Game
   end
 
   def player_turn(player)
-    print player.winning_moves
-    puts ""
     mark = player.take_turn(@players[1 - @switch])
     if @board[mark]
       player_turn(player)
