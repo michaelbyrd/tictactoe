@@ -26,7 +26,7 @@ class Player
   end
 
   def take_turn
-    [ @human ? human_turn : computer_turn , symbol ]
+    @human ? human_turn : computer_turn
   end
 
   def symbol
