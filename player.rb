@@ -1,9 +1,9 @@
 class Player
-  # attr_accessor :squares, :pairs
   def initialize(human)
     @human = human
     @squares = Array.new(9, false)
     @pairs = Array.new(11, false)
+    @winner = false
   end
 
   def record(index)
@@ -13,12 +13,20 @@ class Player
     end
   end
 
+  def check_win(index)
+    @winner = true if @pairs[11-index]
+  end
+
   def is_human?
     @human
   end
 
-  def take_turn(board)
-    [ @human ? human_turn : computer_turn(board) , symbol ]
+  def is_winner?
+    @winner
+  end
+
+  def take_turn
+    [ @human ? human_turn : computer_turn , symbol ]
   end
 
   def symbol
@@ -29,16 +37,7 @@ class Player
     gets.chomp.to_i
   end
 
-  private def computer_turn(board)
-    array = board.squares
-    if board.marked_squares < 2
-      if array[4] == " "
-        4
-      else
-        0
-      end
-    else
-      rand(0..8)
-    end
+  private def computer_turn
+    rand(0..8)
   end
 end

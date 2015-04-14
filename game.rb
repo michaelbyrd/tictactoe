@@ -23,14 +23,19 @@ class Game
   end
 
   def player_turn(player)
-    mark = player.take_turn(@board)
+    mark = player.take_turn
     if @board.is_marked?(mark[0])
       player_turn(player)
     else
-      @switch = 1 - @switch
       player.record(mark[0])
       @board.mark(mark)
+      check_win(player, mark[0])
+      @switch = 1 - @switch
     end
+  end
+
+  private def check_win(player, index)
+    player.check_win(index)
   end
 
   def marked_squares
