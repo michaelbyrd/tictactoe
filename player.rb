@@ -10,7 +10,7 @@ class Player
   def record(index)
     @squares[index] = true
     @squares.each_with_index do |square, i|
-      @pairs[ index + i ] = true if square
+      @pairs[ index + i ] = true if square && i != index # TODO figure this out
     end
     @winner = true if @pairs[ 12 - index ]
   end
