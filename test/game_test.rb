@@ -35,4 +35,34 @@ class GameTest < Minitest::Test
     4.times { game.play_round }
     refute game.play_round
   end
+
+
+  def test_board_can_display_itself
+    game = Game.new
+    assert_output(empty_board) do
+      game.display
+    end
+    # array = Array.new(6, " ") + ["X", "X", "X"]
+    # board = Board.new(array)
+    # assert_output(marked_board) do
+    #   board.display
+    # end
+
+  end
+
+
+  def empty_board
+    %Q{| | | |
+| | | |
+| | | |
+}
+  end
+
+  def marked_board
+    %Q{|X| | |
+| | |X|
+| |X| |
+}
+
+  end
 end

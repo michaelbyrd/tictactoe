@@ -36,7 +36,18 @@ class Game
   end
 
   def is_over?
-    winner || @count >= 9
+    winner.exist? || @count >= 9
+  end
+
+
+  def display
+    puts "|#{write(@board[7])}|#{write(@board[0])}|#{write(@board[5])}|"
+    puts "|#{write(@board[2])}|#{write(@board[4])}|#{write(@board[6])}|"
+    puts "|#{write(@board[3])}|#{write(@board[8])}|#{write(@board[1])}|"
+  end
+
+  private def write(square)
+    square ? @players[square].symbol : " "
   end
 
   private def winner

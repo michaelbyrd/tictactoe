@@ -1,11 +1,12 @@
 class Player
-  attr_accesor :symbol
+  attr_accessor :symbol
   def initialize(human)
-    @human = human
     @squares = Array.new(9, false)
     @pairs = Array.new(11, false)
-    @winner = false
+
+    @human = human
     @symbol = nil
+    @winner = false
   end
 
   def record(index)
