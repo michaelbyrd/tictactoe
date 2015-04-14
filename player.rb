@@ -1,6 +1,6 @@
 class Player
   attr_accessor :symbol, :squares, :pairs
-  def initialize(human)
+  def initialize
     @squares = Array.new(9, false)
     @pairs = Array.new(11, false)
     @symbol = "O"

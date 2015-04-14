@@ -13,7 +13,7 @@ class Game
 
   def initialize
     @board = Array.new(9, false)
-    @players = [ HumanPlayer.new(true), ComputerPlayer.new(false) ]
+    @players = [ HumanPlayer.new, ComputerPlayer.new ]
     @switch = 0 # [ 0, 1 ].sample
     @count = 0
   end
