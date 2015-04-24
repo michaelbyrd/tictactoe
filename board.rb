@@ -21,16 +21,16 @@ class Board
   end
 
   def data
-    [write(@squares[7]), write(@squares[0]), write(@squares[5]),
-    write(@squares[2]), write(@squares[4]), write(@squares[6]),
-    write(@squares[3]), write(@squares[8]), write(@squares[1])]
+    [@squares[7], @squares[0], @squares[5],
+    @squares[2], @squares[4], @squares[6],
+    @squares[3], @squares[8], @squares[1]]
   end
 
   def display
     d = data
-    puts "|#{d[0]}|#{d[1]}|#{d[2]}|"
-    puts "|#{d[3]}|#{d[4]}|#{d[5]}|"
-    puts "|#{d[6]}|#{d[7]}|#{d[8]}|"
+    puts "|#{write(d[0])}|#{write(d[1])}|#{write(d[2])}|"
+    puts "|#{write(d[3])}|#{write(d[4])}|#{write(d[5])}|"
+    puts "|#{write(d[6])}|#{write(d[7])}|#{write(d[8])}|"
   end
 
   private def write(position)
