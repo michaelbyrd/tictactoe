@@ -1,9 +1,8 @@
 class Player
   attr_accessor :symbol, :squares
   def initialize
-    @squares = Array.new(10, false)
-    @squares[0] = nil
-    @pairs = Array.new(15, false)
+    @squares = Array.new(9, false)
+    @pairs = Array.new(12, false)
     @symbol = "O"
     @winner = false
   end
@@ -13,13 +12,20 @@ class Player
   end
 
   def record(mark)
-    @squares.each_with_index do |square, index|
-      if square && mark + index < 15 # TODO figure this out
-        @pairs[ mark + index ] = true
+    @squares.each_with_index do |s, i |
+      if s && mark + i < 12
+        @pairs[ mark + i ] = true
       end
     end
+
+    # @squares.each_with_index do |square, index|
+    #   if square && mark + index < 15 # TODO figure this out
+    #     @pairs[ mark + index ] = true
+    #   end
+    # end
     @squares[mark] = true
-    @winner = true if @pairs[ 15 - mark ]
+
+    @winner = true if @pairs[ 12 - mark ]
     if @winner
       puts "mark: #{mark}"
       puts ""
@@ -31,7 +37,7 @@ class Player
   end
 
   private def possible_moves
-    moves = @squares.map.with_index { |square, i| i if @pairs[ 15 - i ]}
+    moves = @squares.map.with_index { |square, i| i if @pairs[ 12 - i ]}
     moves.reject {|m| m.nil? }
   end
 

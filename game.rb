@@ -12,7 +12,7 @@ class Game
   attr_accessor :board, :players
 
   def initialize
-    @board = Array.new(9, false)
+    @board = Array.new(9, nil)
     @players = [ HumanPlayer.new, ComputerPlayer.new ]
     @switch = [ 0, 1 ].sample
     @count = 0
@@ -29,7 +29,8 @@ class Game
   end
 
   def player_turn(player)
-    mark = player.take_turn(@players[1 - @switch])
+    other = @players[1 - @switch]
+    mark = player.take_turn(other)
     if @board[mark]
       player_turn(player)
     else
@@ -53,10 +54,16 @@ class Game
   end
 
   def data
-    [write(@board[8]), write(@board[1]), write(@board[6]),
-    write(@board[3]), write(@board[5]), write(@board[7]),
-    write(@board[4]), write(@board[9]), write(@board[2])]
+    [write(@board[7]), write(@board[0]), write(@board[5]),
+    write(@board[2]), write(@board[4]), write(@board[6]),
+    write(@board[3]), write(@board[8]), write(@board[1])]
   end
+
+  # def data
+  #   [write(@board[8]), write(@board[1]), write(@board[6]),
+  #   write(@board[3]), write(@board[5]), write(@board[7]),
+  #   write(@board[4]), write(@board[9]), write(@board[2])]
+  # end
 
   def display
     d = data
@@ -71,8 +78,12 @@ class Game
 
 end
 
-puts "|8|1|6|"
-puts "|3|5|7|"
-puts "|4|9|2|"
+# puts "|8|1|6|"
+# puts "|3|5|7|"
+# puts "|4|9|2|"
+
+puts "|7|0|5|"
+puts "|2|4|6|"
+puts "|3|8|1|"
 
 Game.new.play_round
