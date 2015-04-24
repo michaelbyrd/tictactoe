@@ -12,8 +12,8 @@ class Game
   attr_accessor :board, :players
 
   def initialize
-    @board = Array.new(9, nil)
-    @players = [ HumanPlayer.new, ComputerPlayer.new ]
+    @board = Array.new(9, false)
+    @players = [ HumanPlayer.new(@board, 0), ComputerPlayer.new(@board, 1) ]
     @switch = [ 0, 1 ].sample
     @count = 0
   end
@@ -59,12 +59,6 @@ class Game
     write(@board[3]), write(@board[8]), write(@board[1])]
   end
 
-  # def data
-  #   [write(@board[8]), write(@board[1]), write(@board[6]),
-  #   write(@board[3]), write(@board[5]), write(@board[7]),
-  #   write(@board[4]), write(@board[9]), write(@board[2])]
-  # end
-
   def display
     d = data
     puts "|#{d[0]}|#{d[1]}|#{d[2]}|"
@@ -72,8 +66,8 @@ class Game
     puts "|#{d[6]}|#{d[7]}|#{d[8]}|"
   end
 
-  private def write(square)
-    square ? @players[square].symbol : " "
+  private def write(position)
+    position ? @players[position].symbol : " "
   end
 
 end
@@ -87,3 +81,10 @@ puts "|2|4|6|"
 puts "|3|8|1|"
 
 Game.new.play_round
+
+
+# def data
+#   [write(@board[8]), write(@board[1]), write(@board[6]),
+#   write(@board[3]), write(@board[5]), write(@board[7]),
+#   write(@board[4]), write(@board[9]), write(@board[2])]
+# end

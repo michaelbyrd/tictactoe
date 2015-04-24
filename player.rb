@@ -1,7 +1,9 @@
 class Player
   attr_accessor :symbol, :squares
-  def initialize
-    @squares = Array.new(9, false)
+  def initialize(board, position)
+    @board = board
+    @position = position
+    # @squares = Array.new(9, false)
     @pairs = Array.new(12, false)
     @symbol = "O"
     @winner = false
@@ -12,7 +14,7 @@ class Player
   end
 
   def record(mark)
-    @squares.each_with_index do |s, i |
+    @board.each_with_index do |s, i |
       if s && mark + i < 12
         @pairs[ mark + i ] = true
       end
@@ -23,13 +25,13 @@ class Player
     #     @pairs[ mark + index ] = true
     #   end
     # end
-    @squares[mark] = true
+    @board[mark] = @position
 
     @winner = true if @pairs[ 12 - mark ]
     if @winner
       puts "mark: #{mark}"
       puts ""
-      print @squares
+      print @board
       puts ""
       print @pairs
       puts ""
@@ -37,7 +39,7 @@ class Player
   end
 
   private def possible_moves
-    moves = @squares.map.with_index { |square, i| i if @pairs[ 12 - i ]}
+    moves = @board.map.with_index { |square, i| i if @pairs[ 12 - i ]}
     moves.reject {|m| m.nil? }
   end
 
