@@ -1,4 +1,5 @@
 require './player'
+require './board'
 
 # the magic square #
 
@@ -12,8 +13,8 @@ class Game
   attr_accessor :board, :players
 
   def initialize
-    @board = Array.new(9, false)
-    @players = [ HumanPlayer.new(@board, 0), ComputerPlayer.new(@board, 1) ]
+    @board = Board.new
+    @players = [ HumanPlayer.new(@board), ComputerPlayer.new(@board) ]
     @switch = [ 0, 1 ].sample
     @count = 0
   end
@@ -29,16 +30,10 @@ class Game
   end
 
   def player_turn(player)
-    other = @players[1 - @switch]
-    mark = player.take_turn(other)
-    if @board[mark]
-      player_turn(player)
-    else
-      @board[mark] = @switch
-      player.record(mark)
-      @switch = 1 - @switch
-      @count += 1
-    end
+    mark = player.take_turn
+    @board.mark(@switch, mark)
+    @switch = 1 - @switch
+    @count += 1
   end
 
   def is_over?
@@ -49,25 +44,12 @@ class Game
     end
   end
 
+  private def display
+    @board.display
+  end
+
   private def winner
     @players.select { |p| p.has_won? }[0]
-  end
-
-  def data
-    [write(@board[7]), write(@board[0]), write(@board[5]),
-    write(@board[2]), write(@board[4]), write(@board[6]),
-    write(@board[3]), write(@board[8]), write(@board[1])]
-  end
-
-  def display
-    d = data
-    puts "|#{d[0]}|#{d[1]}|#{d[2]}|"
-    puts "|#{d[3]}|#{d[4]}|#{d[5]}|"
-    puts "|#{d[6]}|#{d[7]}|#{d[8]}|"
-  end
-
-  private def write(position)
-    position ? @players[position].symbol : " "
   end
 
 end
