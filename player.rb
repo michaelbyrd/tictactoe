@@ -2,8 +2,9 @@ class Player
   attr_accessor :symbol, :pairs
   def initialize(board)
     @board = board
-    # @squares = Array.new(9, false)
-    @pairs = Array.new(12, false)
+    @pairs = Array.new(12, nil)
+    @my_moves = []
+    @winning_moves = []
     @symbol = "O"
     @winner = false
   end
@@ -12,44 +13,32 @@ class Player
     @winner
   end
 
+  def record(mark)
+    @my_moves.each do |m|
+      @pairs[mark + m] = true if mark + m < 12 && mark + m > 3
+    end
+    @winner = true if winning_moves.include?(mark)
+    @my_moves << mark
+  end
+
+  private def winning_moves
+    moves = @pairs.map.with_index { |p,i| 12 - i if p }
+    moves.select { |m| open_squares.include?(m) }
+  end
+
   private def open_squares
     @board.open_squares
   end
 
-  # def record(mark)
-  #   @board.each_with_index do |s, i |
-  #     if s && mark + i < 12
-  #       @pairs[ mark + i ] = true
-  #     end
-  #   end
-  #
-  #   @board[mark] = true
-  #
-  #   @winner = true if @pairs[ 12 - mark ]
-  #   if @winner
-  #     puts "mark: #{mark}"
-  #     puts ""
-  #     print @board
-  #     puts ""
-  #     print @pairs
-  #     puts ""
-  #   end
-  # end
-
-  # private def possible_moves
-  #   moves = @board.map.with_index { |square, i| i if @pairs[ 12 - i ]}
-  #   moves.reject {|m| m.nil? }
-  # end
-
-  # protected def winning_moves(other)
-  #   possible_moves.reject { |m| other.squares[m] }
-  # end
 end
 
 class HumanPlayer < Player
   def take_turn
+    print open_squares
+    puts ""
     mark = gets.chomp.to_i
     if open_squares.include?(mark)
+      record(mark)
       mark
     else
       take_turn
@@ -59,17 +48,23 @@ end
 
 class ComputerPlayer < Player
   def take_turn
-    # mine = winning_moves(other)
-    # theirs = other.winning_moves(self)
-    # if mine.length > 0
-    #   mine[0]
-    # elsif theirs.length > 0
-    #   theirs[0]
-    # else
-    #   rand(0..9)
-    # end
-    mark = rand(0..9)
+    print @pairs
+    puts ""
+    print "winnning:"
+    print winning_moves
+    puts ""
+    print "open:"
+    print open_squares
+    puts ""
+    if winning_moves.empty?
+      mark = rand(0..9)
+    else
+      mark = winning_moves.sample
+    end
+    puts "mark: #{mark}"
+
     if open_squares.include?(mark)
+      record(mark)
       mark
     else
       take_turn

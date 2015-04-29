@@ -2,6 +2,7 @@ class Board
   attr_accessor :squares
   def initialize
     @squares = Array.new(9, false)
+    @open = (0..8).to_a
   end
 
   def mark(player, position)
@@ -9,15 +10,12 @@ class Board
       false
     else
       @squares[position] = player
+      @open[position] = nil
     end
   end
 
   def open_squares
-    @squares.map.with_index{ |s,i| s ? nil  : i }.compact
-  end
-
-  def best_moves(player)
-
+    @open.compact
   end
 
   def data

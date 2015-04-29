@@ -23,13 +23,13 @@ class Game
     @players[@switch].symbol = "X"
     until is_over?
       player = @players[@switch]
-      puts "-----------"
       player_turn(@players[@switch])
       display
     end
   end
 
   def player_turn(player)
+    puts "--- #{player.class} ---"
     mark = player.take_turn
     @board.mark(@switch, mark)
     @switch = 1 - @switch
