@@ -30,7 +30,7 @@ class Game
 
   def player_turn(player)
     puts "--- #{player.class} ---"
-    mark = player.take_turn
+    mark = player.take_turn(@players[@switch - 1])
     @board.mark(@switch, mark)
     @switch = 1 - @switch
     @count += 1

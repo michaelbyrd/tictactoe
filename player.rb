@@ -21,7 +21,7 @@ class Player
     @my_moves << mark
   end
 
-  private def winning_moves
+  def winning_moves
     moves = @pairs.map.with_index { |p,i| 12 - i if p }
     moves.select { |m| open_squares.include?(m) }
   end
@@ -33,7 +33,7 @@ class Player
 end
 
 class HumanPlayer < Player
-  def take_turn
+  def take_turn(opponent)
     print open_squares
     puts ""
     mark = gets.chomp.to_i
@@ -41,13 +41,13 @@ class HumanPlayer < Player
       record(mark)
       mark
     else
-      take_turn
+      take_turn(opponent)
     end
   end
 end
 
 class ComputerPlayer < Player
-  def take_turn
+  def take_turn(opponent)
     print @pairs
     puts ""
     print "winnning:"
@@ -56,10 +56,14 @@ class ComputerPlayer < Player
     print "open:"
     print open_squares
     puts ""
-    if winning_moves.empty?
-      mark = rand(0..9)
-    else
+    mine = self.winning_moves
+    thiers = opponent.winning_moves
+    if !mine.empty?
       mark = winning_moves.sample
+    elsif !thiers.empty?
+      mark = thiers.sample
+    else
+      mark = rand(0..9)
     end
     puts "mark: #{mark}"
 
@@ -67,7 +71,7 @@ class ComputerPlayer < Player
       record(mark)
       mark
     else
-      take_turn
+      take_turn(opponent)
     end
   end
 end
