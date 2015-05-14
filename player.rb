@@ -27,7 +27,6 @@ end
 
 class HumanPlayer < Player
   def take_turn(opponent)
-    puts winning_moves
     mark = gets.chomp.to_i
     if open_squares.include?(mark)
       record(mark)
