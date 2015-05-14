@@ -6,18 +6,14 @@ class Player
     @my_moves = []
     @winning_moves = []
     @symbol = "O"
-    @winner = false
   end
 
   def has_won?
-    @winner
+    # do any 3 of @my_moves sum to 12?
+    @my_moves.combination(3).detect { |a, b, c| a + b + c == 12 }
   end
 
   def record(mark)
-    @my_moves.each do |m|
-      @pairs[mark + m] = true if mark + m < 12 && mark + m > 3
-    end
-    @winner = true if winning_moves.include?(mark)
     @my_moves << mark
   end
 
@@ -45,18 +41,14 @@ class HumanPlayer < Player
 end
 
 class ComputerPlayer < Player
-  def take_turn(opponent)
-    mine = self.winning_moves
-    thiers = opponent.winning_moves
-    if !mine.empty?
-      mark = winning_moves.sample
-    elsif !thiers.empty?
-      mark = thiers.sample
-    else
-      mark = rand(0..9)
-    end
-    puts "mark: #{mark}"
+  # if I can win this turn, make that move
+  # if my opponent can win, block that move
+  # take the center square if it is available
+  # take a corner square if it is available
+  # take whatever is free
 
+  def take_turn(opponent)
+      mark = rand(0..9)
     if open_squares.include?(mark)
       record(mark)
       mark
