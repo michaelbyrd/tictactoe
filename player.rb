@@ -34,8 +34,6 @@ end
 
 class HumanPlayer < Player
   def take_turn(opponent)
-    print open_squares
-    puts ""
     mark = gets.chomp.to_i
     if open_squares.include?(mark)
       record(mark)
@@ -48,14 +46,6 @@ end
 
 class ComputerPlayer < Player
   def take_turn(opponent)
-    print @pairs
-    puts ""
-    print "winnning:"
-    print winning_moves
-    puts ""
-    print "open:"
-    print open_squares
-    puts ""
     mine = self.winning_moves
     thiers = opponent.winning_moves
     if !mine.empty?

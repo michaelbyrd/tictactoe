@@ -16,13 +16,12 @@ class Game
     @board = Board.new
     @players = [ HumanPlayer.new(@board), ComputerPlayer.new(@board) ]
     @switch = [ 0, 1 ].sample
+    @players[@switch].symbol = "X"
     @count = 0
   end
 
   def play_round
-    @players[@switch].symbol = "X"
     until is_over?
-      player = @players[@switch]
       player_turn(@players[@switch])
       display
     end
