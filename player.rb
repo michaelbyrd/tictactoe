@@ -41,20 +41,26 @@ class HumanPlayer < Player
 end
 
 class ComputerPlayer < Player
-  # if I can win this turn, make that move
-  # if my opponent can win, block that move
-  # take the center square if it is available
-  # take a corner square if it is available
-  # take whatever is free
+
+  def best_move(opponent)
+    # if I can win this turn, make that move
+    return winning_moves if winning_moves
+    # if my opponent can win, block that move
+    return opponent.winning_moves if opponent.winning_moves
+    # take the center square if it is available
+    return 4 if open_squares.include?(4)
+    # take a corner square if it is available
+    return corners.sample unless corners.empty?
+    # take whatever is free
+    return open_squares.sample
+  end
+
+  private def corners
+    [7,5,3,1] & open_squares
+  end
 
   def take_turn(opponent)
-    if winning_moves
-      mark = winning_moves
-    elsif opponent.winning_moves
-      mark = opponent.winning_moves
-    else
-      mark = rand(0..9)
-    end
+    mark = best_move(opponent)
     if open_squares.include?(mark)
       record(mark)
       mark
