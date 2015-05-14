@@ -22,6 +22,7 @@ class Game
   end
 
   def play_round
+    welcome
     until is_over?
       player_turn(@players[@switch])
       display
@@ -29,7 +30,11 @@ class Game
   end
 
   def player_turn(player)
-    puts "--- #{player.class} ---"
+    if player.class == HumanPlayer
+      puts "##            Your turn             ##"
+    else
+      puts "##      The Computer's turn         ##"
+    end
     mark = player.take_turn(@players[@switch - 1])
     @board.mark(@switch, mark)
     @switch = 1 - @switch
@@ -41,7 +46,7 @@ class Game
       if winner.class == NilClass
         puts "It's a tie!"
       else
-        puts "#{winner.class} has won!"
+        puts "The #{winner.class} has won!"
       end
       display
       exit
@@ -50,16 +55,40 @@ class Game
 
   private def display
     @board.display
+    blank
+    line
+    blank
   end
 
   private def winner
     @players.select { |p| p.has_won? }[0]
   end
+
+  private def blank
+    puts "##                                  ##"
+  end
+
+  private def line
+    puts "######################################"
+  end
+
+  private def welcome
+    puts "######################################"
+    puts "##                                  ##"
+    puts "##      Welcome to Tic-Tac-Toe      ##"
+    puts "##                                  ##"
+    puts "##  To mark a square, simply enter  ##"
+    puts "##  one of the numbers below.       ##"
+    puts "##                                  ##"
+    puts "##            |7|0|5|               ##"
+    puts "##            |2|4|6|               ##"
+    puts "##            |3|8|1|               ##"
+    puts "##                                  ##"
+    puts "##           Good Luck!             ##"
+    puts "##       Thanks for playing         ##"
+    puts "##                                  ##"
+    puts "######################################"
+  end
 end
-
-
-puts "|7|0|5|"
-puts "|2|4|6|"
-puts "|3|8|1|"
 
 Game.new.play_round

@@ -26,9 +26,14 @@ class Board
 
   def display
     d = data
-    puts "|#{write(d[0])}|#{write(d[1])}|#{write(d[2])}|"
-    puts "|#{write(d[3])}|#{write(d[4])}|#{write(d[5])}|"
-    puts "|#{write(d[6])}|#{write(d[7])}|#{write(d[8])}|"
+    puts "##                                  ##"
+    row(write(d[0]), write(d[1]), write(d[2]))
+    row(write(d[3]), write(d[4]), write(d[5]))
+    row(write(d[6]), write(d[7]), write(d[8]))
+  end
+
+  private def row(a,b,c)
+    puts "##             |#{a}|#{b}|#{c}|              ##"
   end
 
   private def write(position)
