@@ -1,10 +1,8 @@
 class Player
-  attr_accessor :symbol, :pairs
+  attr_accessor :symbol
   def initialize(board)
     @board = board
-    @pairs = Array.new(12, nil)
     @my_moves = []
-    @winning_moves = []
     @symbol = "O"
   end
 
@@ -55,10 +53,6 @@ class ComputerPlayer < Player
     return open_squares.sample
   end
 
-  private def corners
-    [7,5,3,1] & open_squares
-  end
-
   def take_turn(opponent)
     mark = best_move(opponent)
     if open_squares.include?(mark)
@@ -67,5 +61,9 @@ class ComputerPlayer < Player
     else
       take_turn(opponent)
     end
+  end
+
+  private def corners
+    [7,5,3,1] & open_squares
   end
 end
