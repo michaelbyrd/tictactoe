@@ -32,6 +32,6 @@ class Board
   end
 
   private def write(position)
-    position ? position : " " #@players[position].symbol : " "
+    position ? position : " "
   end
 end
