@@ -39,6 +39,10 @@ end
 
 class ComputerPlayer < Player
 
+  private def first?
+    open_squares.length.odd?
+  end
+
   def best_move(opponent)
     # if I can win this turn, make that move
     return winning_moves if winning_moves
@@ -46,6 +50,8 @@ class ComputerPlayer < Player
     return opponent.winning_moves if opponent.winning_moves
     # take the center square if it is available
     return 4 if open_squares.include?(4)
+    # take an edge square if it is abailable
+    return edges.sample unless edges.empty?
     # take a corner square if it is available
     return corners.sample unless corners.empty?
     # take whatever is free
@@ -64,5 +70,9 @@ class ComputerPlayer < Player
 
   private def corners
     [7,5,3,1] & open_squares
+  end
+
+  private def edges
+    [0,2,6,8] & open_squares
   end
 end
